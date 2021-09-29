@@ -6,7 +6,6 @@ import streamlit as st
 from urllib.parse import quote
 from st_aggrid import AgGrid, JsCode, GridOptionsBuilder
 
-@st.cache
 def _max_width_():
     max_width_str = f"max-width: 2000px;"
     st.markdown(
@@ -55,4 +54,5 @@ if gb is None:
     gb=GridOptionsBuilder.from_dataframe(df)
 AgGrid(df, gridOptions=gb.build(), allow_unsafe_jscode=True)
 st.write("-----")
-st.write("2021-09-28 오후 12:30 (KST) : 모든 행사가 끝나, 더이상 좋아요가 되지 않습니다!\n 대회에 참여하신 모든 학우분들 수고하셨습니다.\n2022년에 동일한 행사가 열릴 때를 대비하여, 가끔 업데이트가 있을 예정입니다!")
+st.write("2021-09-28 오후 12:30 (KST) : 모든 행사가 끝나, 더이상 좋아요가 되지 않습니다!\n 대회에 참여하신 모든 학우분들 수고하셨습니다.")
+st.write("2021-09-29 오후 05:00 (KST) : 2022년에 동일한 행사가 열릴 때를 대비하여, 가끔 업데이트가 있을 예정입니다!")
