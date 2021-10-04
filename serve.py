@@ -6,19 +6,6 @@ import streamlit as st
 from urllib.parse import quote
 from st_aggrid import AgGrid, JsCode, GridOptionsBuilder
 
-def _max_width_():
-    max_width_str = f"max-width: 2000px;"
-    st.markdown(
-        f"""
-    <style>
-    .reportview-container .main .block-container{{
-        {max_width_str}
-    }}
-    </style>    
-    """,
-        unsafe_allow_html=True,
-    )
-
 def fetch_data(max_rows=99, sortmode=1, searchkey="", link=False, link_col="바로가기"):
     url="http://ymsc2021.org/poster.asp?xrow={}&xsearch={}&xquery={}".format(max_rows, sortmode, quote(searchkey, encoding='cp949'))
     body=bs(req.get(url).text, 'lxml').find_all("table", attrs={"class": "boardTable tc"})[0].find_all("tr")
@@ -37,11 +24,13 @@ def fetch_data(max_rows=99, sortmode=1, searchkey="", link=False, link_col="바�
         gb.configure_column("바로가기", headerName='Link', cellRenderer=JsCode('''function(params) {return '<a href=\"'+'http://ymsc2021.org/poster.asp?xsearch=3&xquery='+params.value+'\" target=\"_blank\" rel=\"noopener noreferrer\">링크</a>'}'''), width=300)
     return df, gb
 
-_max_width_()
+st.set_page_config(layout="wide")
 st.title('2021 YMSC 포스터 발표 대회 - 완료')
 st.write('[로그인](http://ymsc2021.org/member/Login.asp)')
-option_1=st.sidebar.selectbox('검색 필드', ['발표자', '소속', '주제'])
-option_2=st.sidebar.text_input('검색 키워드', "")
+with st.sidebar:
+    st.title('연구 검색')
+    option_1=st.selectbox('검색 필드', ['발표자', '소속', '주제'], help='검색 기준')
+    option_2=st.text_input('검색 키워드', "", help='검색할 키워드를 입력해주세요. 첫 40글자만 검색에 반영됩니다.')
 #TO DO : add button to refresh
 #st.button('🔄', on_click=)
 if option_2 != "":
