@@ -71,7 +71,7 @@ with st.sidebar:
 if option_2 != "":
     st.subheader("검색결과")
 else:
-    st.subheader("최종 리더보드")
+    st.subheader("Leaderboard")
 st.write("-----")
 grid_item = st.empty()
 st.write("-----")
