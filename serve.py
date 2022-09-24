@@ -89,4 +89,4 @@ with grid_item.container():
         )
         if gb is None:
             gb = GridOptionsBuilder.from_dataframe(df)
-    asdf = AgGrid(df, gridOptions=gb.build(), allow_unsafe_jscode=True, theme='streamlit')
+    asdf = AgGrid(df, gridOptions=gb.build(), allow_unsafe_jscode=True, fit_columns_on_grid_load=True theme='streamlit')
