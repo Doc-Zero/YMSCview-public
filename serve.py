@@ -7,6 +7,7 @@ import streamlit as st
 from bs4 import BeautifulSoup as bs
 from st_aggrid import AgGrid, GridOptionsBuilder, JsCode
 
+mainurl = "http://ymsc2022.org"
 
 def fetch_from_url(url):
     body = (
@@ -28,8 +29,7 @@ def fetch_from_url(url):
 
 def fetch_data(max_rows=99, sortmode=1, searchkey="", link=False, link_col="바로가기", encoding="cp949"):
     headings, all_rows = fetch_from_url(
-        "http://ymsc2021.org/poster.asp?xrow={}&xsearch={}&xquery={}".format(
-            max_rows, sortmode, quote(searchkey, encoding=encoding)
+        f"{mainurl}/poster.asp?xkind={year}&xrow={max_rows}&xsearch={sortmode}&xquery={quote(searchkey, encoding=encoding)}"
         )
     )
     rearr_headings = headings[-2:] + headings[:-2]
@@ -53,7 +53,7 @@ def fetch_data(max_rows=99, sortmode=1, searchkey="", link=False, link_col="바�
             "바로가기",
             headerName="Link",
             cellRenderer=JsCode(
-                """function(params) {return '<a href=\"'+'http://ymsc2021.org/poster.asp?xsearch=3&xquery='+params.value+'\" target=\"_blank\" rel=\"noopener noreferrer\">링크</a>'}"""
+                f"""function(params) {{return '<a href=\"'+'{mainurl}/poster.asp?xsearch=3&xquery='+params.value+'\" target=\"_blank\" rel=\"noopener noreferrer\">링크</a>'}}"""
             ),
             width=300,
         )
@@ -62,7 +62,7 @@ def fetch_data(max_rows=99, sortmode=1, searchkey="", link=False, link_col="바�
 
 st.set_page_config(layout="wide")
 st.title("2021 YMSC 포스터 발표 대회 - 완료")
-st.write("[로그인](http://ymsc2021.org/member/Login.asp)")
+st.write(f"[로그인]({mainurl}/member/Login.asp)")
 with st.sidebar:
     st.title("연구 검색")
     option_1 = st.selectbox("검색 필드", ["발표자", "소속", "주제"], help="검색 기준")
@@ -76,9 +76,9 @@ else:
 st.write("-----")
 grid_item = st.empty()
 st.write("-----")
-st.write("2021-09-28 오후 12:30 (KST) : 모든 행사가 끝나, 더이상 좋아요가 되지 않습니다!")
+st.write("2021-09-28 오후 12:30 (KST) : 2021년 YMSC의 모든 행사가 끝나, 더이상 좋아요가 되지 않습니다!")
 st.write("2021-09-29 오후 05:00 (KST) : 2022년 YMSC를 대비하여 가끔 업데이트가 있을 예정입니다.")
-
+st.write("2022-09-24 오후 01:00 (KST) : 2022년 YMSC 반영 작업 진행 중입니다. 추가적인 변경 사항이 있을 예정입니다.")
 
 
 with grid_item.container():
