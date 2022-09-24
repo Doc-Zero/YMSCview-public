@@ -30,7 +30,6 @@ def fetch_from_url(url):
 def fetch_data(max_rows=99, sortmode=1, searchkey="", link=False, link_col="바로가기", encoding="cp949"):
     headings, all_rows = fetch_from_url(
         f"{mainurl}/poster.asp?xkind={year}&xrow={max_rows}&xsearch={sortmode}&xquery={quote(searchkey, encoding=encoding)}"
-        )
     )
     rearr_headings = headings[-2:] + headings[:-2]
     if all_rows == [["Data not found."]]:
