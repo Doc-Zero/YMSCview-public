@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup as bs
 from st_aggrid import AgGrid, GridOptionsBuilder, JsCode
 
 mainurl = "http://ymsc2022.org"
-
+year=2022
 def fetch_from_url(url):
     body = (
         bs(req.get(url).text, "lxml")
@@ -60,7 +60,7 @@ def fetch_data(max_rows=99, sortmode=1, searchkey="", link=False, link_col="바�
 
 
 st.set_page_config(layout="wide")
-st.title("2021 YMSC 포스터 발표 대회 - 완료")
+st.title(f"{year} YMSC 포스터 발표 대회")
 st.write(f"[로그인]({mainurl}/member/Login.asp)")
 with st.sidebar:
     st.title("연구 검색")
