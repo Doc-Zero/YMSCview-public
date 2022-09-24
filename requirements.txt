@@ -3,4 +3,4 @@ lxml==4.9.1
 pandas==1.4.3
 requests==2.28.0
 streamlit==1.12.2
-streamlit-aggrid==0.2.3.post2
+streamlit-aggrid==0.3.3
