@@ -66,6 +66,7 @@ with st.sidebar:
     st.title("연구 검색")
     option_1 = st.selectbox("검색 필드", ["발표자", "소속", "주제"], help="검색 기준")
     option_2 = st.text_input("검색 키워드", "", help="검색할 키워드를 입력해주세요. 첫 40글자만 검색에 반영됩니다.")
+    year = st.selectbox("YMSC 연도", ["2022", "2021"], help="YMSC 시행 년도")
 # TO DO : add button to refresh
 # st.button('🔄', on_click=)
 if option_2 != "":
@@ -89,4 +90,4 @@ with grid_item.container():
         )
         if gb is None:
             gb = GridOptionsBuilder.from_dataframe(df)
-    asdf = AgGrid(df, gridOptions=gb.build(), allow_unsafe_jscode=True, fit_columns_on_grid_load=True, theme='streamlit')
+    asdf = AgGrid(df, gridOptions=gb.build(), allow_unsafe_jscode=True, theme='streamlit')
